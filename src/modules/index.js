@@ -1,3 +1,3 @@
-export {userRouter} from './user/user.controller.js'
-export {postRouter} from './post/post.controller.js'
-export {commentRouter} from './comment/comment.controller.js'
+export {userRouter} from './log/log.controller.js'
+export {postRouter} from './book/book.controller.js'
+export {commentRouter} from './collection/collection.controller.js'

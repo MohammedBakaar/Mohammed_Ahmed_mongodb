@@ -11,10 +11,5 @@ config({
 export const PORT = Number(process.env.PORT)
 export const DB = {
     name : process.env.DB_NAME ,
-    user : process.env.DB_USER ,
-    pass : process.env.DB_PASS ,
-    host :process.env.DB_HOST ,
-    dialect : process.env.DB_DIALECT,
-    max : Number(process.env.DB_MAX),
-    min : Number(process.env.DB_MIN)
+    url : process.env.DB_URL
 }
