@@ -1,0 +1,66 @@
+db.createCollection("Books",{
+ validator : {
+   title : { $type : "string"}
+ } 
+})
+
+db.authors.insertOne({name:"author1",nationality:"British"})
+
+db.createCollection("logs" , { capped : true , size : 1024*1024 })
+
+db.Books.createIndex({title : 1})
+
+
+db.Books.insertOne({
+  title : "Book1",
+  author: "Ali",
+  year: 1937,
+  genres: ["Fantasy", "Adventure"]
+})
+
+
+db.Books.insertMany([
+  {
+    title: "Future",
+    author: "George Orwell",
+    year: 2020,
+    genres: ["Science Fiction"]
+  },
+  {
+    title: "To Kill a Mockingbird",
+    author: "Harper Lee",
+    year: 1960,
+    genres: ["Classic", "Fiction"]
+  },
+  {
+    title: "Brave New World",
+    author: "Aldous Huxley",
+    year: 2006,
+    genres: ["Dystopian", "Science Fiction"]
+  }
+])
+
+db.logs.insertOne({
+  book_id: "64b5c2d8a123456ef8914",
+  action: "borrowed"
+})
+db.Books.updateOne({title : "Future"},{ $set : {year : 2022 }})
+
+
+db.Books.findOne({title : "Brave New World"})
+
+db.Books.find({$and : [{year : {$gte:1990}},{year : {$lte:2010}}]})
+
+db.Books.find({genres : { $elemMatch : { $eq : "Science Fiction"}}}) 
+or genres : "Science Fiction"
+
+db.Books.find().sort({year : -1 }).skip(2).limit(3)
+
+db.Books.find({ year : {$type : "int"}})
+
+db.Books.find({genres: { $nin: ["Science Fiction", "Horror"] }})
+
+
+db.Books.deleteMany({ year : { $lt : 2000}})
+
+db.Books.find({year : {$gt : 2000}}).sort({ year : -1})
