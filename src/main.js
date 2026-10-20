@@ -14,9 +14,7 @@ app.use(express.json());
 app.use("/book", bookRouter);
 app.use("/log", logRouter);
 app.use("/collection",createRouter );
-app.use("/{*}",(req,res)=>{
-  respond(res,req.url,404,"route not found")
-})
+
 
 app.use(globalErrorHandler);
 
