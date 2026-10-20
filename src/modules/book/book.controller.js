@@ -44,3 +44,31 @@ bookRouter.get("/year",async (req,res)=>{
     respond(res,result,200,"Books fetched")
 
 })
+bookRouter.get("/genre" , async(req,res)=>{
+        let data = req.query.genre
+        
+        let result = await bs.findByGenre(data);
+
+        respond(res,result ,result.length ? 200:404 ,`Books ${result.length ? `fetched` : `not found`} `)
+})
+bookRouter.get("/skip-limit" , async(req,res)=>{
+        let result = await bs.getWithLimit();
+        respond(res,result ,result.length ? 200:404 ,`Books ${result.length ? `fetched` : `not found`} `)
+})
+bookRouter.get("/year-int" , async(req,res)=>{
+        let result = await bs.getIntYear();
+        respond(res,result ,result.length ? 200:404 ,`Books ${result.length ? `fetched` : `not found`} `)
+})
+bookRouter.get("/exclude-genres" , async(req,res)=>{
+        let result = await bs.getExcludeGenres();
+        respond(res,result ,result.length ? 200:404 ,`Books ${result.length ? `fetched` : `not found`} `)
+})
+bookRouter.delete("/year" , async(req,res)=>{
+    let data = req.query.year;
+      let result =    await bs.deleteBefore(data);
+        respond(res,result,200 ,"ok")
+})
+bookRouter.get("/aggregate1" , async(req,res)=>{
+        let result = await bs.aggregate1();
+        respond(res,result ,result.length ? 200:404 ,`Books ${result.length ? `fetched` : `not found`} `)
+})
